@@ -1,0 +1,80 @@
+
+import React from 'react';
+import { Zap, ShieldCheck, Flame } from 'lucide-react';
+import { FadeIn } from '../components/FadeIn';
+
+export const Mechanism: React.FC = () => {
+  return (
+    <section className="py-24 bg-gradient-to-b from-slate-950 to-brand-900/20 relative overflow-hidden">
+      <div className="container mx-auto px-4">
+        <FadeIn className="text-center mb-20">
+          <span className="text-brand-500 font-bold tracking-wider uppercase text-sm">Ciência Aplicada ao Movimento</span>
+          <h2 className="text-4xl md:text-6xl font-bold text-white mt-4 mb-6">
+            A Tríade do <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-600">Metabolismo Ativo</span>
+          </h2>
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            Esqueça os treinos que te deixam exausta e dolorida. O Método Gusta usa a <strong className="text-white">inteligência biológica</strong> do seu corpo para queimar gordura enquanto protege suas articulações.
+          </p>
+        </FadeIn>
+
+        <div className="relative">
+          {/* Connecting Line (Desktop) - Animated Gradient */}
+          <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-slate-800 via-brand-500 to-slate-800 -translate-y-1/2 opacity-40"></div>
+
+          <div className="grid md:grid-cols-3 gap-8 relative z-10">
+            {[
+              {
+                icon: <Zap className="w-8 h-8 text-white" />,
+                step: "01",
+                title: "Ativação Miofascial",
+                desc: "Enquanto exercícios comuns focam apenas no músculo superficial, nós ativamos a musculatura profunda (estabilizadores). Isso consome 3x mais energia apenas para manter sua postura ereta."
+              },
+              {
+                icon: <Flame className="w-8 h-8 text-white" />,
+                step: "02",
+                title: "Efeito EPOC de 24h",
+                desc: "Geramos uma 'dívida de oxigênio' segura. Seu metabolismo continua acelerado por até 24 horas após a aula para recuperar o corpo, queimando gordura mesmo enquanto você dorme."
+              },
+              {
+                icon: <ShieldCheck className="w-8 h-8 text-white" />,
+                step: "03",
+                title: "Blindagem Articular",
+                desc: "Zero impacto. Ao invés de desgastar joelhos e coluna com saltos, nós lubrificamos as articulações e fortalecemos a estrutura. Ideal para quem tem hérnia, condromalácia ou diástase."
+              }
+            ].map((item, i) => (
+              <FadeIn key={i} delay={i * 0.2}>
+                <div className="relative group h-full">
+                  {/* Hover Glow Effect */}
+                  <div className="absolute inset-0 bg-brand-500 blur-3xl opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                  
+                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-8 rounded-2xl h-full hover:-translate-y-2 transition-transform duration-300 shadow-xl group-hover:border-brand-500/30">
+                    <div className="text-7xl font-black text-slate-800/50 absolute top-2 right-4 select-none pointer-events-none group-hover:text-brand-900/20 transition-colors">
+                      {item.step}
+                    </div>
+                    
+                    <div className="w-16 h-16 bg-gradient-to-br from-brand-500 to-brand-700 rounded-2xl flex items-center justify-center shadow-lg shadow-brand-500/20 mb-6 relative z-10 group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-4 relative z-10 group-hover:text-brand-400 transition-colors">{item.title}</h3>
+                    <p className="text-slate-400 relative z-10 leading-relaxed text-sm md:text-base">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+        
+        {/* Bottom Tagline */}
+        <FadeIn delay={0.6} className="mt-16 text-center">
+            <div className="inline-flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-full px-6 py-2 text-sm text-slate-400">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Método validado para todas as idades (18 a 80 anos)
+            </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+};

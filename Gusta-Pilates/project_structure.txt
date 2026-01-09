@@ -1,0 +1,66 @@
+GUSTA PILATES - PROJECT STRUCTURE
+=================================
+
+/
+├── .gitignore
+├── App.tsx
+├── components/
+│   ├── AIHelperBot.tsx
+│   ├── Button.tsx
+│   ├── CountDown.tsx
+│   ├── DNAEngine.tsx
+│   ├── DNANemesis.tsx
+│   ├── FadeIn.tsx
+│   ├── GlobalNotes.tsx
+│   ├── Navbar.tsx
+│   └── WhatsAppFab.tsx
+├── documentation/
+│   ├── 01_COMO_O_PROJETO_FOI_CRIADO.md
+│   ├── 02_PARA_QUE_SERVE_O_PROJETO.md
+│   ├── 03_MONETIZACAO_E_TECNOLOGIAS.md
+│   ├── CANONICAL_CORE.md
+│   ├── CHANGELOG.md
+│   ├── FULL_PROJECT_DOCUMENTATION.html
+│   ├── index.html
+│   └── original_prompt.txt
+├── index.html
+├── index.tsx
+├── metadata.json
+├── package.json
+├── PROJECT_SPEC.md
+├── README.md
+├── sections/
+│   ├── AdminDashboard.tsx
+│   ├── FAQ.tsx
+│   ├── Footer.tsx
+│   ├── Hero.tsx
+│   ├── LiveRoom.tsx
+│   ├── Mechanism.tsx
+│   ├── Offer.tsx
+│   ├── Problem.tsx
+│   ├── Testimonials.tsx
+│   └── VSL.tsx
+├── src/
+│   ├── App.tsx
+│   └── modules/
+│       └── checkout/
+│           ├── adapters/
+│           │   ├── IPaymentGateway.ts
+│           │   ├── PayPalAdapter.ts
+│           │   ├── PixAdapter.ts
+│           │   └── StripeAdapter.ts
+│           ├── components/
+│           │   └── CheckoutDemo.tsx
+│           ├── context/
+│           │   └── CheckoutContext.tsx
+│           └── domain/
+│               └── types.ts
+├── tsconfig.json
+├── txt-project/
+│   ├── _LEIA_ME.txt
+│   ├── AdminDashboard.tsx.txt
+│   ├── AIHelperBot.tsx.txt
+│   ├── CheckoutContext.tsx.txt
+│   └── DNANemesis.tsx.txt
+├── types.ts
+└── vite.config.ts

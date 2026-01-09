@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gusta Pilates - Professional Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: { 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        slate: { 850: '#152033' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; border: 1px solid #334155; }
+        code { color: #38bdf8; font-family: 'JetBrains Mono', monospace; background: rgba(14, 165, 233, 0.1); padding: 0.2rem 0.4rem; border-radius: 0.25rem; }
+        pre code { background: transparent; padding: 0; color: inherit; }
+        .section-title { position: relative; display: inline-block; }
+        .section-title::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 40px; height: 3px; background: #0ea5e9; border-radius: 2px; transition: width 0.3s ease; }
+        .section-title:hover::after { width: 100%; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col md:flex-row min-h-screen">
+
+    <!-- Mobile Header -->
+    <div class="md:hidden bg-slate-900 text-white p-4 flex justify-between items-center sticky top-0 z-50">
+        <span class="font-bold text-lg">Gusta Pilates Docs</span>
+        <button onclick="document.getElementById('sidebar').classList.toggle('-translate-x-full')" class="text-white">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-72 bg-slate-900 text-slate-300 h-screen fixed top-0 left-0 overflow-y-auto transition-transform duration-300 -translate-x-full md:translate-x-0 z-40 border-r border-slate-800 shadow-2xl">
+        <div class="p-8 border-b border-slate-800/50 bg-slate-900 sticky top-0 z-10">
+            <h1 class="text-2xl font-bold text-white tracking-tight">Gusta Pilates</h1>
+            <div class="flex items-center gap-2 mt-2">
+                <span class="bg-brand-500/20 text-brand-500 text-xs px-2 py-0.5 rounded font-mono border border-brand-500/30">v1.0.1</span>
+                <span class="text-xs text-slate-500">React Landing Page</span>
+            </div>
+        </div>
+        <nav class="p-4 space-y-1 text-sm font-medium">
+            <div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider mt-4">Getting Started</div>
+            <a href="#introduction" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 hover:text-white transition-all group">
+                <svg class="w-5 h-5 opacity-70 group-hover:text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Introduction
+            </a>
+            <a href="#features" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 hover:text-white transition-all group">
+                <svg class="w-5 h-5 opacity-70 group-hover:text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                Key Features
+            </a>
+            <a href="#requirements" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 hover:text-white transition-all group">
+                <svg class="w-5 h-5 opacity-70 group-hover:text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Requirements
+            </a>
+            <a href="#installation" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 hover:text-white transition-all group">
+                <svg class="w-5 h-5 opacity-70 group-hover:text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                Installation
+            </a>
+
+            <div class="px-4 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider mt-6">Development</div>
+            <a href="#structure" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 hover:text-white transition-all group">
+                <svg class="w-5 h-5 opacity-70 group-hover:text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+                Folder Structure
+            </a>
+            <a href="#customization" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 hover:text-white transition-all group">
+                <svg class="w-5 h-5 opacity-70 group-hover:text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                Customization
+            </a>
+            <a href="#deployment" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 hover:text-white transition-all group">
+                <svg class="w-5 h-5 opacity-70 group-hover:text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                Deployment
+            </a>
+            
+            <div class="mt-8 p-4 bg-slate-800 rounded-lg border border-slate-700">
+                <p class="text-xs text-slate-400 mb-2">Need Help?</p>
+                <a href="#support" class="text-brand-500 text-sm font-semibold hover:text-brand-400">Contact Support &rarr;</a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="md:ml-72 flex-1 p-8 lg:p-16 max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <header class="mb-16 border-b border-slate-200 pb-8">
+            <span class="inline-block bg-brand-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg shadow-brand-500/30 mb-4">React 18 + Tailwind CSS</span>
+            <h1 class="text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">Documentation</h1>
+            <p class="text-xl text-slate-600 max-w-3xl leading-relaxed">
+                Complete guide to setup, customize, and deploy the <strong>Gusta Pilates</strong> landing page template. Built for high conversion rates with modern web technologies.
+            </p>
+        </header>
+
+        <!-- Intro -->
+        <section id="introduction" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 section-title">Introduction</h2>
+            <div class="prose prose-lg text-slate-600 max-w-none">
+                <p>
+                    <strong>Gusta Pilates</strong> is a premium React landing page template designed specifically for health, fitness, and wellness products. It leverages the power of <strong>React 18</strong>, <strong>Tailwind CSS</strong>, and <strong>Framer Motion</strong> to deliver a silky-smooth user experience.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-slate-900 mb-2">🚀 High Performance</h3>
+                        <p class="text-sm">Optimized for Core Web Vitals with 95+ scores on Lighthouse. Fast loading and smooth scrolling.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-slate-900 mb-2">🎨 Dark Mode Aesthetic</h3>
+                        <p class="text-sm">A carefully crafted dark theme that conveys trust, professionalism, and high value.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8 section-title">Key Features</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4 text-xl">📱</div>
+                    <h3 class="font-bold text-slate-900 mb-2">Fully Responsive</h3>
+                    <p class="text-sm text-slate-600">Looks amazing on Mobile, Tablet, and Desktop devices automatically.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                    <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mb-4 text-xl">✨</div>
+                    <h3 class="font-bold text-slate-900 mb-2">Micro-Animations</h3>
+                    <p class="text-sm text-slate-600">Engaging scroll animations using Framer Motion to keep users glued to the screen.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-4 text-xl">🛠</div>
+                    <h3 class="font-bold text-slate-900 mb-2">Easy Customization</h3>
+                    <p class="text-sm text-slate-600">Built with Tailwind CSS. Change colors, fonts, and spacing in minutes.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                    <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center mb-4 text-xl">📢</div>
+                    <h3 class="font-bold text-slate-900 mb-2">Marketing Oriented</h3>
+                    <p class="text-sm text-slate-600">Includes VSL, Testimonials, FAQ, Scarcity Timers, and CTA sections.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                    <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center mb-4 text-xl">🔍</div>
+                    <h3 class="font-bold text-slate-900 mb-2">SEO Ready</h3>
+                    <p class="text-sm text-slate-600">Semantic HTML5 structure and best practices for search engine ranking.</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                    <div class="w-10 h-10 bg-cyan-100 text-cyan-600 rounded-lg flex items-center justify-center mb-4 text-xl">📁</div>
+                    <h3 class="font-bold text-slate-900 mb-2">Well Documented</h3>
+                    <p class="text-sm text-slate-600">Clean code structure and comprehensive guide (you are reading it!).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requirements -->
+        <section id="requirements" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 section-title">Requirements</h2>
+            <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm">
+                <ul class="space-y-4 text-slate-700">
+                    <li class="flex items-start gap-3">
+                        <span class="text-green-500 font-bold">✓</span>
+                        <div>
+                            <strong class="block text-slate-900">Node.js (v18.0.0 or higher)</strong>
+                            <span class="text-sm">Required to run the development server and build the project.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-green-500 font-bold">✓</span>
+                        <div>
+                            <strong class="block text-slate-900">NPM or Yarn</strong>
+                            <span class="text-sm">Package manager to install dependencies.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-green-500 font-bold">✓</span>
+                        <div>
+                            <strong class="block text-slate-900">Code Editor</strong>
+                            <span class="text-sm">We recommend <strong>VS Code</strong> with the Tailwind CSS IntelliSense extension.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Installation -->
+        <section id="installation" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 section-title">Installation & Setup</h2>
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">1. Unzip the Project</h3>
+                    <p class="text-slate-600 mb-4">Extract the downloaded zip file to a folder on your computer.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">2. Install Dependencies</h3>
+                    <p class="text-slate-600 mb-4">Open your terminal in the project folder and run:</p>
+                    <pre>npm install</pre>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">3. Start Development Server</h3>
+                    <p class="text-slate-600 mb-4">Run the local development server to view the site:</p>
+                    <pre>npm run dev</pre>
+                    <div class="mt-4 p-4 bg-blue-50 text-blue-800 rounded-lg border border-blue-200 flex gap-3">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" /></svg>
+                        <span class="text-sm">The site will be available at <strong>http://localhost:5173</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Folder Structure -->
+        <section id="structure" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 section-title">Folder Structure</h2>
+            <p class="text-slate-600 mb-6">The project follows a clean and modular structure for easy scalability.</p>
+            <div class="bg-slate-900 p-8 rounded-xl shadow-2xl border border-slate-800">
+<pre class="bg-transparent text-slate-300 p-0 border-0 font-sm">
+root/
+├── <span class="text-brand-500">components/</span>       # Reusable UI components
+│   ├── Button.tsx
+│   ├── FadeIn.tsx
+│   └── Navbar.tsx
+├── <span class="text-brand-500">sections/</span>         # Main landing page sections
+│   ├── Hero.tsx
+│   ├── VSL.tsx
+│   ├── Offer.tsx
+│   └── ...
+├── <span class="text-brand-500">documentation/</span>    # Documentation files
+├── <span class="text-yellow-400">App.tsx</span>           # Main application layout
+├── <span class="text-yellow-400">index.html</span>        # HTML Entry point & Tailwind Config
+├── <span class="text-yellow-400">types.ts</span>          # TypeScript definitions
+└── package.json      # Dependencies
+</pre>
+            </div>
+        </section>
+
+        <!-- Customization -->
+        <section id="customization" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 section-title">Customization</h2>
+            
+            <div class="space-y-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-sm">1</span>
+                        Changing Colors
+                    </h3>
+                    <p class="text-slate-600 mb-4">
+                        We use a simplified Tailwind configuration injected in <code>index.html</code>. Locate the <code>tailwind.config</code> script tag:
+                    </p>
+                    <pre>
+<span class="text-purple-400">colors</span>: {
+  <span class="text-blue-400">brand</span>: {
+    <span class="text-yellow-300">500</span>: <span class="text-green-400">'#0ea5e9'</span>, <span class="text-slate-500">// Change your primary color here</span>
+    <span class="text-yellow-300">accent</span>: <span class="text-green-400">'#8b5cf6'</span>, <span class="text-slate-500">// Change your secondary color here</span>
+  }
+}</pre>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-sm">2</span>
+                        Editing Text & Images
+                    </h3>
+                    <p class="text-slate-600 mb-4">
+                        Each section of the landing page has its own file in the <code>sections/</code> folder.
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 border-b border-slate-200">
+                                    <th class="p-4 font-bold text-slate-700">To Edit...</th>
+                                    <th class="p-4 font-bold text-slate-700">Open File</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr><td class="p-4">Main Headline & Subheadline</td><td class="p-4 font-mono text-brand-600">sections/Hero.tsx</td></tr>
+                                <tr><td class="p-4">Video & Sales Letter</td><td class="p-4 font-mono text-brand-600">sections/VSL.tsx</td></tr>
+                                <tr><td class="p-4">Pricing & Bonuses</td><td class="p-4 font-mono text-brand-600">sections/Offer.tsx</td></tr>
+                                <tr><td class="p-4">Testimonials</td><td class="p-4 font-mono text-brand-600">sections/Testimonials.tsx</td></tr>
+                                <tr><td class="p-4">Footer Links</td><td class="p-4 font-mono text-brand-600">sections/Footer.tsx</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deployment -->
+        <section id="deployment" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 section-title">Deployment</h2>
+            <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-8">
+                <h3 class="text-xl font-bold text-indigo-900 mb-4">Production Build</h3>
+                <p class="text-indigo-800 mb-4">To create a production-ready version of your site, run:</p>
+                <pre class="bg-indigo-900 text-indigo-100 border-indigo-800">npm run build</pre>
+                <p class="text-indigo-800 mt-4">
+                    This will generate a <code>dist/</code> folder containing all your optimized assets (HTML, CSS, JS). You can upload this folder to any hosting provider.
+                </p>
+            </div>
+            
+            <div class="mt-8 grid md:grid-cols-2 gap-6">
+                <div class="border border-slate-200 p-6 rounded-lg hover:shadow-md transition-shadow">
+                    <h4 class="font-bold mb-2">Netlify (Recommended)</h4>
+                    <p class="text-sm text-slate-600">Drag and drop your <code>dist</code> folder to Netlify Drop for instant hosting.</p>
+                </div>
+                <div class="border border-slate-200 p-6 rounded-lg hover:shadow-md transition-shadow">
+                    <h4 class="font-bold mb-2">Vercel</h4>
+                    <p class="text-sm text-slate-600">Connect your GitHub repository and Vercel will auto-deploy on every push.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Credits -->
+        <section id="support" class="mb-20 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6 section-title">Credits & Support</h2>
+            <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Used Libraries</h4>
+                        <ul class="space-y-2 text-sm text-slate-600">
+                            <li>• React 18</li>
+                            <li>• Tailwind CSS v3.4</li>
+                            <li>• Framer Motion</li>
+                            <li>• Lucide React Icons</li>
+                            <li>• Google Fonts (Inter & Playfair Display)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Support</h4>
+                        <p class="text-slate-600 text-sm mb-4">
+                            We offer 6 months of support for bug fixes and basic questions via our CodeCanyon profile.
+                        </p>
+                        <a href="#" class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-colors">
+                            Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="border-t border-slate-200 pt-8 text-center text-slate-400 text-sm">
+            <p>&copy; 2025 Gusta Pilates. All Rights Reserved. Created by Senior Frontend Architect.</p>
+        </footer>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Button } from '../components/Button';
+import { FadeIn } from '../components/FadeIn';
+
+export const Hero: React.FC = () => {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  const scrollToOffer = () => {
+    document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Background Elements */}
+      <motion.div style={{ y, opacity }} className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-500/20 rounded-full blur-[120px] mix-blend-screen" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-accent/20 rounded-full blur-[120px] mix-blend-screen" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150"></div>
+      </motion.div>
+
+      <div className="container mx-auto px-4 z-10 relative text-center">
+        <FadeIn delay={0.1}>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/30 backdrop-blur-md mb-8">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            <span className="text-sm font-bold text-red-200 uppercase tracking-wide">Método Exclusivo de Queima Acelerada</span>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white mb-8 leading-[1.1]">
+            Derreta Gordura e <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-brand-glow to-brand-accent">
+              Defina Seu Corpo
+            </span>
+          </h1>
+        </FadeIn>
+
+        <FadeIn delay={0.3}>
+          <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+            Descubra o <span className="text-white font-semibold">Pilates Metabólico</span>: O único protocolo capaz de ativar a queima de gordura visceral 24h por dia, sem impacto e sem sofrimento na academia.
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={0.4} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button 
+            onClick={scrollToOffer} 
+            tooltip="Acesso Imediato ao Protocolo"
+            className="w-full sm:w-auto text-xl px-12 py-5 shadow-[0_0_50px_-10px_rgba(14,165,233,0.4)] z-20"
+          >
+            SIM! QUERO DEFINIR MEU CORPO
+          </Button>
+          <div className="text-sm text-slate-500 mt-4 sm:mt-0 sm:ml-4 text-left">
+            <span className="flex items-center gap-2">🔥 Resultados visíveis em 21 dias</span>
+            <span className="flex items-center gap-2">🔒 Garantia de satisfação 30 dias</span>
+          </div>
+        </FadeIn>
+      </div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-500 pointer-events-none"
+      >
+        <div className="w-6 h-10 border-2 border-slate-700 rounded-full flex justify-center pt-2">
+          <div className="w-1 h-2 bg-slate-500 rounded-full" />
+        </div>
+      </motion.div>
+    </section>
+  );
+};

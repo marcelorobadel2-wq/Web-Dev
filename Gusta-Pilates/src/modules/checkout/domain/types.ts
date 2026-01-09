@@ -1,0 +1,45 @@
+
+export type PaymentMethodType = 'CREDIT_CARD' | 'PIX' | 'BOLETO' | 'PAYPAL_WALLET';
+
+export type CheckoutMode = 'TRANSPARENT' | 'REDIRECT' | 'EMBEDDED';
+
+export type TransactionStatus = 'IDLE' | 'PROCESSING' | 'APPROVED' | 'REJECTED' | 'PENDING' | 'ERROR';
+
+export interface CustomerData {
+  name: string;
+  email: string;
+  document: string; // CPF/CNPJ
+  address?: {
+    street: string;
+    number: string;
+    zipCode: string;
+    city: string;
+    state: string;
+    country: string;
+  };
+}
+
+export interface PaymentData {
+  amount: number; // Em centavos (ex: 1000 = R$ 10,00)
+  currency: string;
+  method: PaymentMethodType;
+  customer: CustomerData;
+  cardToken?: string; // Para checkout transparente
+  installments?: number;
+}
+
+export interface TransactionResult {
+  transactionId: string;
+  status: TransactionStatus;
+  message?: string;
+  metadata?: any;
+  redirectUrl?: string; // Para gateways redirect
+  qrCode?: string; // Para PIX
+  boletoUrl?: string; // Para Boleto
+}
+
+export interface GatewayConfig {
+  publicKey: string;
+  sandbox: boolean;
+  mode: CheckoutMode;
+}

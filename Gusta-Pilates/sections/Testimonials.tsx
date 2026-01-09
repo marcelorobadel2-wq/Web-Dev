@@ -1,0 +1,258 @@
+
+import React, { useState, useEffect } from 'react';
+import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FadeIn } from '../components/FadeIn';
+import { Testimonial } from '../types';
+
+const testimonials: Testimonial[] = [
+  {
+    name: "Patrícia Lima",
+    role: "Perdeu 12kg em 3 meses",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    quote: "Eu já tinha tentado de tudo: jejum, remédio, shake. Só com o Gusta Pilates minha barriga desinchou de verdade. O melhor é que não fico flácida.",
+    revenue: "-12kg Eliminados"
+  },
+  {
+    name: "Carla Mendes",
+    role: "Mãe de 2 filhos",
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    quote: "Minha pochete pós-parto sumiu. Achei que pilates era leve demais pra emagrecer, mas suei mais em 20 min aqui do que em 1h de esteira.",
+    revenue: "Cintura: -8cm"
+  },
+  {
+    name: "Juliana Costa",
+    role: "Empresária",
+    image: "https://randomuser.me/api/portraits/women/33.jpg",
+    quote: "Entrei pelas dores nas costas, fiquei pelo corpo novo. Minhas roupas 42 estão caindo, já comprei calças 38. Método aprovadíssimo!",
+    revenue: "Manequim 42 -> 38"
+  },
+  {
+    name: "Renata Souza",
+    role: "Advogada",
+    image: "https://randomuser.me/api/portraits/women/26.jpg",
+    quote: "O Pilates Metabólico mudou minha relação com o exercício. Não é sobre sofrer, é sobre técnica. Resultados rápidos e consistentes.",
+    revenue: "-6kg em 21 dias"
+  },
+  {
+    name: "Fernanda Dias",
+    role: "Professora",
+    image: "https://randomuser.me/api/portraits/women/12.jpg",
+    quote: "Minha postura melhorou 100% e as medidas da cintura acompanharam. Me sinto muito mais leve e definida agora.",
+    revenue: "-10cm de Abdômen"
+  }
+];
+
+export const Testimonials: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    if (!isHovered) {
+      const interval = setInterval(() => {
+        handleNext();
+      }, 4000);
+      return () => clearInterval(interval);
+    }
+  }, [activeIndex, isHovered]);
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const getCardPosition = (index: number) => {
+    const total = testimonials.length;
+    const diff = (index - activeIndex + total) % total;
+
+    if (diff === 0) return 'center';
+    if (diff === 1) return 'right';
+    if (diff === total - 1) return 'left';
+    return 'hidden';
+  };
+
+  const variants = {
+    center: {
+      x: 0,
+      scale: 1,
+      zIndex: 30,
+      opacity: 1,
+      rotateY: 0,
+      filter: 'blur(0px)',
+      display: 'block',
+    },
+    left: {
+      x: -320,
+      scale: 0.8,
+      zIndex: 20,
+      opacity: 0.4,
+      rotateY: 45,
+      filter: 'blur(2px)',
+      display: 'block',
+    },
+    right: {
+      x: 320,
+      scale: 0.8,
+      zIndex: 20,
+      opacity: 0.4,
+      rotateY: -45,
+      filter: 'blur(2px)',
+      display: 'block',
+    },
+    hidden: {
+      x: 0,
+      scale: 0.5,
+      zIndex: 10,
+      opacity: 0,
+      rotateY: 0,
+      filter: 'blur(10px)',
+      display: 'none',
+    },
+  };
+
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  if (isMobile) {
+    variants.left.x = -40;
+    variants.left.scale = 0.9;
+    variants.left.opacity = 0;
+    
+    variants.right.x = 40;
+    variants.right.scale = 0.9;
+    variants.right.opacity = 0;
+  }
+
+  return (
+    <section className="py-24 bg-slate-950 overflow-hidden relative perspective-1000">
+      <div className="container mx-auto px-4 mb-16 relative z-10">
+        <FadeIn className="text-center">
+          <h2 className="text-4xl font-bold text-white mb-4 italic">Resultados Reais. Corpos Reais.</h2>
+          <p className="text-slate-400">Veja o que acontece quando você ativa o Modo Queima.</p>
+        </FadeIn>
+      </div>
+
+      {/* Área do Carrossel 3D */}
+      <div 
+        className="relative h-[500px] flex items-center justify-center"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Controles Manuais */}
+        <button 
+          onClick={handlePrev}
+          className="absolute left-4 md:left-20 z-40 p-3 rounded-full bg-slate-800/50 border border-slate-700 text-white hover:bg-brand-500 hover:border-brand-500 transition-all backdrop-blur-sm"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button 
+          onClick={handleNext}
+          className="absolute right-4 md:right-20 z-40 p-3 rounded-full bg-slate-800/50 border border-slate-700 text-white hover:bg-brand-500 hover:border-brand-500 transition-all backdrop-blur-sm"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+
+        {/* Cards */}
+        <div className="relative w-full max-w-4xl mx-auto h-full flex items-center justify-center perspective-container">
+          <AnimatePresence initial={false}>
+            {testimonials.map((t, i) => {
+              const position = getCardPosition(i);
+              const isActive = position === 'center';
+
+              return (
+                <motion.div
+                  key={i}
+                  initial="hidden"
+                  animate={position}
+                  variants={variants}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  drag={isMobile ? "x" : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -50) handleNext();
+                    if (info.offset.x > 50) handlePrev();
+                  }}
+                  className="absolute w-[90%] md:w-[500px] bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl flex flex-col justify-between h-[400px] origin-center cursor-grab active:cursor-grabbing"
+                  style={{
+                    boxShadow: isActive ? '0 20px 50px -12px rgba(14, 165, 233, 0.25)' : 'none',
+                    borderColor: isActive ? 'rgba(14, 165, 233, 0.5)' : 'rgba(30, 41, 59, 1)'
+                  }}
+                >
+                  {/* Active Indicator Bar */}
+                  {isActive && (
+                    <motion.div 
+                      layoutId="activeBar"
+                      className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-brand-500 rounded-b-full shadow-[0_0_10px_rgba(14,165,233,0.8)]"
+                    />
+                  )}
+
+                  <div className="absolute top-6 right-8 opacity-20">
+                    <Quote className="w-12 h-12 text-brand-500 fill-current" />
+                  </div>
+
+                  <div>
+                    <div className="flex gap-1 mb-6 text-yellow-500">
+                      {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-current" />)}
+                    </div>
+                    <p className="text-xl text-slate-200 mb-8 font-medium leading-relaxed italic">
+                      "{t.quote}"
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-4 border-t border-slate-800 pt-6">
+                    <div className="relative">
+                      <img 
+                        src={t.image} 
+                        alt={t.name} 
+                        loading="lazy"
+                        className="w-14 h-14 rounded-full object-cover ring-2 ring-brand-500/30" 
+                      />
+                      {isActive && (
+                          <div className="absolute -bottom-1 -right-1 bg-brand-500 w-5 h-5 rounded-full border-2 border-slate-900 flex items-center justify-center">
+                          <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+                          </div>
+                      )}
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-lg">{t.name}</h4>
+                      <p className="text-brand-400 text-sm font-semibold uppercase tracking-wider">{t.role}</p>
+                    </div>
+                    <div className="ml-auto">
+                      <span className={`text-xs font-black px-3 py-1.5 rounded-full border whitespace-nowrap ${
+                          isActive 
+                              ? 'bg-brand-500 text-white border-brand-400' 
+                              : 'bg-slate-800 text-slate-500 border-slate-700'
+                      }`}>
+                        {t.revenue}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Indicadores de Paginação */}
+      <div className="flex justify-center gap-2 mt-8">
+        {testimonials.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActiveIndex(i)}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === activeIndex ? 'w-8 bg-brand-500' : 'w-2 bg-slate-800 hover:bg-slate-700'
+            }`}
+          />
+        ))}
+      </div>
+
+      <style>{`
+        .perspective-container {
+            perspective: 1000px;
+        }
+      `}</style>
+    </section>
+  );
+};

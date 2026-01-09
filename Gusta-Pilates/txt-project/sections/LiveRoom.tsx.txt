@@ -1,0 +1,24 @@
+
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Users, Lock, Send, MessageCircle } from 'lucide-react';
+import { FadeIn } from '../components/FadeIn';
+
+// Tipos para o chat simulado
+interface ChatMessage {
+  id: string;
+  user: string;
+  avatar: string;
+  text: string;
+  time: string;
+  type: 'question' | 'result' | 'support' | 'normal';
+}
+
+const INITIAL_MESSAGES: ChatMessage[] = [
+  { id: '1', user: 'Ana Clara', avatar: 'https://randomuser.me/api/portraits/women/44.jpg', text: 'Gente, acabei a aula 2 agora. Estou suando muito, é normal?', time: 'há 2 min', type: 'question' },
+  { id: '2', user: 'Beatriz M.', avatar: 'https://randomuser.me/api/portraits/women/68.jpg', text: 'Simmm Ana! O efeito EPOC é isso aí. Bebe bastante água.', time: 'há 1 min', type: 'support' },
+  { id: '3', user: 'Carla Dias', avatar: 'https://randomuser.me/api/portraits/women/12.jpg', text: 'Bom dia meninas! Hoje fechei 7 dias. -1.5kg na balança! 🎉', time: 'agora', type: 'result' },
+];
+
+const INCOMING_QUEUE: ChatMessage[] = [
+  { id: '4', user: 'Mariana S.', avatar: 'https://randomuser.me/api/portraits/women/90.jpg', text: 'Alguém teve dificuldade com o cardápio no

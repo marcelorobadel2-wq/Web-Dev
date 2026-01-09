@@ -1,0 +1,68 @@
+
+import React from 'react';
+import { AlertTriangle, Ghost, Scale, Ban } from 'lucide-react';
+import { FadeIn } from '../components/FadeIn';
+
+export const Problem: React.FC = () => {
+  const pains = [
+    {
+      icon: <Scale className="w-6 h-6 text-red-500" />,
+      title: "O Efeito Platô Maldito",
+      text: "Você fecha a boca, faz cardio até cansar, mas a balança travou. Seu corpo entrou em 'modo de economia' e se recusa a queimar mais gordura."
+    },
+    {
+      icon: <Ban className="w-6 h-6 text-red-500" />,
+      title: "Academia que Incha",
+      text: "A musculação tradicional aumenta o cortisol (hormônio do estresse), o que te deixa inchada e retendo líquidos, ao invés de fina e definida."
+    },
+    {
+      icon: <Ghost className="w-6 h-6 text-red-500" />,
+      title: "Flacidez Pós-Perda",
+      text: "Quem emagrece só com dieta fica 'mole'. A pele sobra e o músculo não aparece. Você quer emagrecer, mas quer ficar firme."
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-slate-950 border-t border-slate-900 relative overflow-hidden">
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20" />
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <FadeIn direction="down" delay={0.1}>
+            <div className="inline-flex items-center gap-2 text-red-500 bg-red-500/10 px-4 py-1 rounded-full text-sm font-bold mb-6">
+              <AlertTriangle className="w-4 h-4" /> PARE DE PASSAR FOME
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Por que 90% das mulheres <br />
+              <span className="text-red-500 decoration-red-900/50 underline decoration-4 underline-offset-4">Falham em Emagrecer?</span>
+            </h2>
+          </FadeIn>
+          <FadeIn delay={0.3}>
+            <p className="text-xl text-slate-400">
+              Não é falta de força de vontade. É erro de estratégia. Exercícios de alto impacto e dietas loucas destroem seu metabolismo e aumentam a compulsão alimentar.
+            </p>
+          </FadeIn>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {pains.map((pain, index) => (
+            <FadeIn key={index} delay={0.2 + (index * 0.1)} direction="up">
+              <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl hover:border-red-500/30 transition-all duration-300 h-full group">
+                <div className="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  {pain.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-red-500 transition-colors">{pain.title}</h3>
+                <p className="text-slate-400 leading-relaxed">
+                  {pain.text}
+                </p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

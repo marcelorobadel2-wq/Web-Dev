@@ -1,0 +1,28 @@
+PASTA DE EXPORTAÇÃO DE CÓDIGO - GUSTA PILATES
+=============================================
+
+Esta pasta contém versões em texto (.txt) dos componentes vitais do sistema.
+Utilize estes arquivos para alimentar IAs, documentação ou backup rápido.
+
+ARQUIVOS INCLUÍDOS:
+-------------------
+
+1. AdminDashboard.tsx.txt
+   - Localização original: sections/AdminDashboard.tsx
+   - Função: Painel de controle, Editor do Bot, Simulador de iPhone, Métricas.
+
+2. DNANemesis.tsx.txt
+   - Localização original: components/DNANemesis.tsx
+   - Função: Engine de Engenharia de Prompt, Governança de Copy, Histórico.
+
+3. AIHelperBot.tsx.txt
+   - Localização original: components/AIHelperBot.tsx
+   - Função: Chatbot flutuante, Lógica de auto-open, Renderização de mensagens.
+
+4. CheckoutContext.tsx.txt
+   - Localização original: modules/checkout/context/CheckoutContext.tsx
+   - Função: Gerenciamento de estado global de pagamentos, Padrão Strategy.
+
+COMO USAR:
+----------
+Copie o conteúdo destes arquivos e cole no prompt da sua IA preferida para restaurar o contexto de desenvolvimento instantaneamente.

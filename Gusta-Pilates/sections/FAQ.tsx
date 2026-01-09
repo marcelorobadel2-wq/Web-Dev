@@ -1,0 +1,74 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus, Minus } from 'lucide-react';
+import { FadeIn } from '../components/FadeIn';
+import { FaqItem } from '../types';
+
+const faqs: FaqItem[] = [
+  {
+    question: "Pilates emagrece mesmo ou é só alongamento?",
+    answer: "O Método Gusta Pilates NÃO é apenas alongamento. É um protocolo metabólico. Combinamos isometria com repetições fluídas que elevam a queima calórica acima da musculação tradicional, focando na queima de gordura e não apenas no ganho de massa."
+  },
+  {
+    question: "Preciso fazer dieta restritiva junto?",
+    answer: "Não. Você receberá nosso Cardápio Anti-Inflamatório. O foco não é comer pouco, é comer os alimentos certos que 'destravam' a queima de gordura e desincham o corpo. Você não passará fome."
+  },
+  {
+    question: "Tenho muita gordura abdominal, funciona pra mim?",
+    answer: "Sim, esse é o foco principal. O Pilates fortalece o 'Power House' (centro de força abdominal). Isso age como uma cinta natural, reduzindo medidas da cintura muito mais rápido que abdominais comuns."
+  },
+  {
+    question: "Em quanto tempo vejo diferença na balança?",
+    answer: "Nossas alunas relatam desinchaço significativo em 7 dias. Perda de peso consistente começa a ser notada entre 15 a 21 dias seguindo o cronograma de 20 minutos diários."
+  }
+];
+
+export const FAQ: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  return (
+    <section className="py-24 bg-slate-950">
+      <div className="container mx-auto px-4 max-w-3xl">
+        <FadeIn className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Dúvidas Frequentes</h2>
+        </FadeIn>
+
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <FadeIn key={index} delay={index * 0.1}>
+              <div 
+                className={`bg-slate-900 border ${activeIndex === index ? 'border-brand-500' : 'border-slate-800'} rounded-xl overflow-hidden transition-colors duration-300`}
+              >
+                <button
+                  onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                >
+                  <span className="text-lg font-semibold text-white">{faq.question}</span>
+                  {activeIndex === index ? (
+                    <Minus className="w-5 h-5 text-brand-500 flex-shrink-0" />
+                  ) : (
+                    <Plus className="w-5 h-5 text-slate-500 flex-shrink-0" />
+                  )}
+                </button>
+                <AnimatePresence>
+                  {activeIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="p-6 pt-0 text-slate-400 leading-relaxed border-t border-slate-800/50">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

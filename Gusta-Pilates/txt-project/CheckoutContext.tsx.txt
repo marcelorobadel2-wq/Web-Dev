@@ -1,0 +1,86 @@
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { IPaymentGateway } from '../adapters/IPaymentGateway';
+import { PaymentData, TransactionResult, TransactionStatus } from '../domain/types';
+import { StripeAdapter } from '../adapters/StripeAdapter';
+import { PayPalAdapter } from '../adapters/PayPalAdapter';
+import { PixAdapter } from '../adapters/PixAdapter';
+
+interface CheckoutContextProps {
+  isLoading: boolean;
+  status: TransactionStatus;
+  result: TransactionResult | null;
+  activeGateway: IPaymentGateway | null;
+  availableGateways: IPaymentGateway[];
+  selectGateway: (gatewayId: string) => void;
+  processCheckout: (data: PaymentData) => Promise<void>;
+}
+
+const CheckoutContext = createContext<CheckoutContextProps>({} as CheckoutContextProps);
+
+const GATEWAYS = [
+  new PixAdapter(),
+  new StripeAdapter('pk_test_123456'), 
+  new PayPalAdapter('client_id_paypal'),
+];
+
+export const CheckoutProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [activeGateway, setActiveGateway] = useState<IPaymentGateway>(GATEWAYS[0]);
+  const [status, setStatus] = useState<TransactionStatus>('IDLE');
+  const [result, setResult] = useState<TransactionResult | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (activeGateway) {
+      activeGateway.initialize().catch(err => console.error('Gateway Init Error', err));
+    }
+  }, [activeGateway]);
+
+  const selectGateway = (id: string) => {
+    const gw = GATEWAYS.find(g => g.id === id);
+    if (gw) setActiveGateway(gw);
+  };
+
+  const processCheckout = async (data: PaymentData) => {
+    if (!activeGateway) return;
+
+    setIsLoading(true);
+    setStatus('PROCESSING');
+    
+    try {
+      const res = await activeGateway.processPayment(data);
+      setResult(res);
+      setStatus(res.status);
+
+      if (res.redirectUrl) {
+        window.location.href = res.redirectUrl;
+      }
+
+    } catch (error) {
+      console.error(error);
+      setStatus('ERROR');
+      setResult({
+        transactionId: '',
+        status: 'ERROR',
+        message: 'Erro desconhecido no checkout'
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <CheckoutContext.Provider value={{
+      isLoading,
+      status,
+      result,
+      activeGateway,
+      availableGateways: GATEWAYS,
+      selectGateway,
+      processCheckout
+    }}>
+      {children}
+    </CheckoutContext.Provider>
+  );
+};
+
+export const useCheckout = () => useContext(CheckoutContext);

@@ -1,0 +1,157 @@
+
+# Blueprint do Projeto: Gusta Pilates Landing Page
+
+Este documento serve como especificação técnica "nano-detalhada" para a recriação exata da Landing Page "Gusta Pilates". O objetivo é permitir que qualquer agente de IA ou desenvolvedor reconstrua a aplicação fielmente, tanto em código quanto em design e comportamento.
+
+## 1. Visão Geral e Stack Tecnológica
+
+*   **Tipo de Aplicação**: Single Page Application (SPA) focada em Alta Conversão (Vendas).
+*   **Framework**: React 19 (compatível com 18+).
+*   **Build Tool**: Vite.
+*   **Linguagem**: TypeScript.
+*   **Estilização**: Tailwind CSS (Injetado via CDN no `index.html` para configuração runtime ágil, mas estruturado como classes utilitárias padrão).
+*   **Animações**: Framer Motion (para transições de entrada, scroll e interações) + CSS Animations nativas (via Tailwind config).
+*   **Ícones**: Lucide React.
+*   **Deploy**: Netlify (configurado via `netlify.toml`).
+
+---
+
+## 2. Design System & Identidade Visual
+
+A estética é **"Dark Mode Premium"**, focada em transmitir modernidade, tecnologia metabólica e saúde.
+
+### 2.1. Tipografia
+*   **Principal (Sans)**: 'Inter', sans-serif (Legibilidade, UI, Textos corridos).
+*   **Secundária (Serif)**: 'Playfair Display', serif (Usada para destaque, elegância e o logo itálico).
+*   **Font Weights**: Uso pesado de 900 (Black) para preços e headlines, 400/300 para textos de apoio.
+
+### 2.2. Paleta de Cores (Tailwind Config)
+O fundo é escuro (`slate-950` / `#020617`), com acentos em Ciano/Azul Elétrico e Roxo.
+
+*   **Background**: `#020617` (Slate 950 modificado/escuro profundo).
+*   **Brand 500 (Primary)**: `#0ea5e9` (Sky 500 - Azul vibrante).
+*   **Brand Accent**: `#8b5cf6` (Violet 500 - Roxo para gradientes secundários).
+*   **Brand Glow**: `#38bdf8` (Ciano para efeitos de luz).
+*   **Textos**: Branco puro para títulos, `slate-400` para parágrafos.
+*   **Alerta/Urgência**: Vermelho (`red-500`) para cronômetros e avisos de erro/dor.
+
+### 2.3. Efeitos Visuais Globais
+1.  **Noise Overlay**: Uma textura de ruído (`noise.svg`) é aplicada com opacidade baixa sobre fundos gradientes para evitar "banding" e dar textura premium.
+2.  **Glassmorphism**: Uso extensivo de `backdrop-blur-md` com bordas semitransparentes (`border-white/10` ou `border-slate-800`).
+3.  **Glows**: Elementos "blobs" desfocados (`blur-[120px]`) atrás de seções importantes.
+
+---
+
+## 3. Estrutura de Componentes e Comportamento
+
+### 3.1. App.tsx (Layout Mestre)
+*   **Barra de Progresso**: Uma linha (`h-1`) no topo da tela que cresce conforme o scroll (`useScroll` do Framer Motion). Gradiente `from-brand-500 to-brand-accent`.
+*   **Fullscreen**: Botão flutuante ou na navbar que alterna a API Fullscreen do navegador.
+*   **Sticky Mobile CTA**: Uma barra fixa no rodapé que aparece **apenas** após o scroll passar do Hero (para mobile), contendo um botão de compra rápida.
+
+### 3.2. Navbar (`components/Navbar.tsx`)
+*   **Comportamento**: Transparente no topo. Ao rolar > 20px, torna-se `slate-950/80` com blur e borda inferior.
+*   **Conteúdo**: Logo "GUSTA PILATES" (Pilates em azul), Botão de Fullscreen e Botão de CTA (apenas Desktop).
+
+### 3.3. Hero Section (`sections/Hero.tsx`)
+*   **Fundo**: Dois orbs gigantes (Azul e Roxo) com blur extremo animados flutuando. Overlay de ruído.
+*   **Badge**: "Método Exclusivo..." com um ponto pulsante vermelho (`animate-pulse`).
+*   **Headline**: "Derreta Gordura e [Defina Seu Corpo]" (Gradiente no texto destacado).
+*   **Botão Principal**: Componente `Button` com variante `primary`. Efeito de brilho interno ao passar o mouse.
+*   **Indicador de Scroll**: Pequena animação de "mouse" na parte inferior.
+
+### 3.4. VSL (Video Sales Letter) (`sections/VSL.tsx`)
+*   **Container**: Moldura com efeito de vidro (`slate-900/50`).
+*   **Interatividade**: Ao passar o mouse, um "glow" traseiro se intensifica.
+*   **Thumbnail**: Imagem de Pilates com overlay escuro. Botão de Play centralizado que escala (`scale-110`) no hover.
+*   **Copy**: "Verifique se o seu som está ligado".
+
+### 3.5. Problem Section (`sections/Problem.tsx`)
+*   **Background**: Padrão de grid sutil (`bg-[linear-gradient...]`) com máscara radial para desaparecer nas bordas.
+*   **Cards**: 3 Cards (Efeito Platô, Academia que Incha, Flacidez).
+*   **Estilo**: Borda fina que brilha levemente em vermelho/brand no hover. Ícones Lucide coloridos.
+
+### 3.6. Mechanism Section (`sections/Mechanism.tsx`)
+*   **Layout**: 3 Passos num grid horizontal.
+*   **Elemento Visual**: Uma linha horizontal conecta os cards (apenas desktop).
+*   **Cards**: Números grandes ("01", "02") no fundo, tipografia pesada. Ícones dentro de caixas com gradiente.
+*   **Animação**: `FadeIn` escalonado (delay progressivo).
+
+### 3.7. Testimonials (`sections/Testimonials.tsx`)
+*   **Mecânica Crítica**: Carrossel horizontal com "zonas de indução".
+    *   Existem áreas invisíveis nas laterais esquerda e direita (15-20% da tela).
+    *   Ao passar o mouse nessas áreas, o carrossel rola automaticamente (`requestAnimationFrame`).
+    *   No mobile, funciona com touch/swipe normal (`snap-x`).
+*   **Design do Card**: Estrelas amarelas, foto de perfil com anel de status (online), texto do depoimento e uma "tag" de resultado (ex: "-12kg").
+
+### 3.8. Offer Section (`sections/Offer.tsx`)
+*   **Stack**: Lista de benefícios com ícones de Check (`CheckCircle2`). Preços riscados à direita.
+*   **Preço**: Destaque enorme para "12x R$ 49,90".
+*   **Scarcity**: Componente `CountDown` que simula 15 minutos e reseta (efeito evergreen), estilizado em vermelho translúcido.
+*   **Garantia**: Selo de garantia 30 dias com texto de reversão de risco.
+
+### 3.9. FAQ (`sections/FAQ.tsx`)
+*   **Accordion**: Apenas um item aberto por vez.
+*   **Animação**: `AnimatePresence` do Framer Motion para expandir/colapsar altura suavemente.
+*   **Ícones**: Alterna entre `Plus` e `Minus`.
+
+---
+
+## 4. Componentes Reutilizáveis (UI Kit)
+
+### 4.1. Button (`components/Button.tsx`)
+*   **Variantes**: Primary (Gradiente), Secondary (Branco), Outline (Borda).
+*   **Animação**: `whileHover={{ scale: 1.02 }}`.
+*   **Efeito Especial**: Div absoluta interna com blur que aumenta opacidade no hover (efeito de luz interna). Ícone `ArrowRight` que se move para a direita no hover.
+
+### 4.2. FadeIn (`components/FadeIn.tsx`)
+*   Wrapper do Framer Motion usado em quase todas as seções.
+*   Configurável para direção (up, down, left, right).
+*   Entra quando o elemento está visível na viewport (`whileInView`).
+
+---
+
+## 5. Copywriting e Gatilhos Psicológicos
+
+O texto não é lorem ipsum. Ele segue uma estrutura de copy de resposta direta:
+1.  **Promessa**: Emagrecimento sem impacto (Pilates Metabólico).
+2.  **Mecanismo Único**: Ativação da queima visceral 24h (Efeito EPOC).
+3.  **Inimigo Comum**: Academia tradicional (que incha/estressa) e dietas de fome.
+4.  **Prova Social**: Depoimentos com dados numéricos específicos.
+5.  **Ancoragem de Preço**: Mostra o valor total (R$ 1.997) riscado antes do preço real.
+
+---
+
+## 6. Arquivos e Estrutura de Diretórios
+
+```
+/
+├── index.html          # Contém Tailwind CDN config e fontes
+├── src/                # (Virtual root no Vite standard, aqui na raiz)
+│   ├── App.tsx
+│   ├── index.tsx
+│   ├── types.ts
+│   ├── components/
+│   │   ├── Button.tsx
+│   │   ├── CountDown.tsx
+│   │   ├── FadeIn.tsx
+│   │   └── Navbar.tsx
+│   └── sections/
+│       ├── Hero.tsx
+│       ├── VSL.tsx
+│       ├── Problem.tsx
+│       ├── Mechanism.tsx
+│       ├── Testimonials.tsx
+│       ├── Offer.tsx
+│       ├── FAQ.tsx
+│       └── Footer.tsx
+├── netlify.toml        # Configuração de deploy
+└── package.json        # Dependências (React, Framer Motion, Lucide)
+```
+
+## 7. Instruções para Recriação
+
+1.  **Configurar index.html**: Copiar o script de configuração do Tailwind exatamente como está para garantir as cores personalizadas (`brand-500`, `pulse-slow`, etc).
+2.  **Instalar Deps**: `npm install react react-dom framer-motion lucide-react`.
+3.  **Copiar Componentes**: Manter a lógica de `framer-motion` nos componentes visuais, pois ela dita a sensação de fluidez "premium" do site.
+4.  **Manter Texto**: Não alterar os textos da oferta, pois estão otimizados para conversão.

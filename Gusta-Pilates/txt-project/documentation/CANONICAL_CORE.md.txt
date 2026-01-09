@@ -1,0 +1,120 @@
+
+# CANONICAL_CORE.md
+**CLASSIFICAÇÃO:** ARTEFATO MESTRE DE GOVERNANÇA
+**SISTEMA:** DNA NEMESIS ENGINE (v1.1 Hardened)
+**CONTEXTO:** GUSTA PILATES LANDING PAGE
+
+---
+
+## 1. IDENTIDADE CANÔNICA DO SISTEMA
+
+O **DNA Nemesis** não é apenas um componente de UI; é um **Sistema Determinístico de Engenharia de Prompt** acoplado a uma interface React. Sua função primária é orquestrar LLMs externos para gerar copy de resposta direta de alta conversão, eliminando a variabilidade criativa ("alucinação") típica de interações em linguagem natural.
+
+O sistema opera sob a premissa de **"Hardened Logic"** (Lógica Blindada): o operador humano fornece variáveis, mas a estratégia de persuasão é injetada via código imutável.
+
+---
+
+## 2. OBJETIVO ESTRATÉGICO DO CORE
+
+A existência deste sistema obedece a três mandatos supremos:
+
+1.  **Determinismo Persuasivo:** Garantir que o output (copy) siga estritamente o protocolo "Conversion Funnel" (Atenção -> Agitação -> Solução -> Prova -> Ação), independente do modelo de IA utilizado.
+2.  **Imunidade à Degradação:** Prevenir que iterações sucessivas do usuário diluam a agressividade ou a especificidade da oferta.
+3.  **Auditabilidade de Processo:** Transformar a criação de copy em um processo engenheirado, repetível e versionado, removendo a "arte" e inserindo "ciência".
+
+---
+
+## 3. ESCOPO IMUTÁVEL (GOVERNANÇA DO CORE)
+
+As seguintes estruturas lógicas, definidas no arquivo `components/DNANemesis.tsx`, constituem o **Núcleo Imutável**. Elas NÃO podem ser alteradas, suavizadas ou refatoradas sob pretexto de "melhoria de UX" ou "simplificação".
+
+### 3.1. Diretivas Primárias (`CORE_DIRECTIVES`)
+Define a persona (Copywriter de Elite/Psicólogo Comportamental) e a metodologia. Esta string deve ser injetada *verbatim* em toda interação.
+
+### 3.2. Constraints Negativas (`NEGATIVE_CONSTRAINTS`)
+Lista de proibições estritas (voz passiva, generalismos, jargão corporativo). O sistema opera por *via negativa*: define o que *não* fazer para garantir qualidade.
+
+### 3.3. Matriz de Agressividade (`AGGRESSIVENESS_MATRIX`)
+O controle de tom ('Baixa' a 'Extrema') é uma invariante matemática do sistema. A lógica de negócio depende que estes prompts específicos sejam mantidos para calibrar a saída do LLM.
+
+---
+
+## 4. ARQUITETURA LÓGICA DO SISTEMA
+
+O DNA Nemesis utiliza uma arquitetura de prompt em três camadas (Layered Prompt Architecture):
+
+### Camada 1: CORE (Estática)
+- **Conteúdo:** Diretivas, Constraints e Persona.
+- **Função:** Estabelecer as "Leis da Física" do universo da copy.
+- **Mutabilidade:** 0%.
+
+### Camada 2: CONTEXT (Dinâmica/Input)
+- **Conteúdo:** Nicho, Produto, Público, Objetivo e Tom.
+- **Função:** Dados brutos fornecidos pelo operador.
+- **Validação:** O sistema impõe sanitização rigorosa (bloqueio de inputs vazios ou curtos) antes de permitir a geração.
+
+### Camada 3: TASK (Iterativa/Ramificada)
+- **Fase 1 (Gênesis):** Gera a estrutura base ("God Mode Landing Page").
+- **Fase 2+ (Refinamento/Nemesis):** Atua como um *Auditor* ou *Editor Ruthless*.
+    - **Diferencial Crítico:** Nas iterações seguintes, o prompt **não** pede para "melhorar o texto". Ele ordena explicitamente: "Critique o Hook", "Afie a Lâmina", "Mate a Objeção".
+    - Isso força o LLM a sair do modo "gerador" e entrar no modo "corretor", prevenindo o drift de qualidade.
+
+---
+
+## 5. PROTOCOLO DE USO OPERACIONAL
+
+Para operadores humanos ou agentes de IA interagindo com o sistema:
+
+1.  **Entrada de Dados:** Preenchimento obrigatório dos campos de Nicho, Produto e Público. O sistema bloqueará a operação se a integridade dos dados for insuficiente.
+2.  **Geração Fase 1:** O operador copia o prompt gerado e o submete a um LLM externo.
+3.  **Feedback Loop:** O operador não deve tentar "conversar" com o LLM. Ele deve apenas retornar ao DNA Nemesis e clicar em "Confirmar & Refinar".
+4.  **Escalada:** O sistema gera automaticamente a instrução da Fase 2, focada em aumentar a agressividade e especificidade baseada na Matriz de Agressividade selecionada.
+
+**REGRA DE OURO:** O DNA Nemesis é o cérebro; o LLM externo é apenas o processador de linguagem. A estratégia reside no código React, não no chat.
+
+---
+
+## 6. PROTOCOLO DE AUDITORIA
+
+Para verificar a integridade do sistema:
+
+1.  **Verificação de Injeção:** Inspecione se `CORE_DIRECTIVES` e `NEGATIVE_CONSTRAINTS` estão presentes no output final da função `generateMasterPrompt`.
+2.  **Verificação de Reset:** Confirme se a alteração de qualquer dado do Contexto (ex: mudar o Público) reseta forçadamente a Iteração para 1. Isso impede contaminação de contexto.
+3.  **Sanitização:** Teste se o botão de cópia permanece desabilitado quando campos contêm apenas espaços em branco.
+
+---
+
+## 7. PROTOCOLO DE EVOLUÇÃO CONTROLADA
+
+Este sistema já está em estágio de produção "Hardened". Alterações são desencorajadas. Caso sejam estritamente necessárias, devem obedecer:
+
+- **Permitido:** Endurecer regras de validação (`isValid`).
+- **Permitido:** Adicionar novas `NEGATIVE_CONSTRAINTS` para corrigir comportamentos alucinatórios recorrentes de novos LLMs.
+- **Permitido:** Refinar a `AGGRESSIVENESS_MATRIX` para maior precisão semântica.
+- **PROIBIDO:** Adicionar persistência local (localStorage/banco de dados). O sistema deve ser "stateless" entre sessões para garantir pureza.
+- **PROIBIDO:** Permitir edição manual do prompt dentro da UI. O prompt deve ser opaco e imutável pelo operador.
+
+---
+
+## 8. TRANSFERÊNCIA DE ATIVOS DIGITAIS (HANDOVER)
+
+**Atenção Agente de IA / Desenvolvedor Receptor:**
+
+Ao assumir este repositório, você reconhece que:
+1.  O arquivo `components/DNANemesis.tsx` é o ativo crítico de maior valor.
+2.  A UI (`App.tsx`, `sections/*`) serve apenas para suportar a metodologia de vendas.
+3.  Você NÃO deve refatorar a lógica de geração de strings no `DNANemesis.tsx` para torná-la "mais limpa" ou "dry", pois a redundância e a especificidade das strings são propositais para controle do LLM.
+
+Se solicitado a "melhorar o sistema", sua única via de ação é aumentar a robustez das restrições e validações. Não expanda o escopo funcional. Mantenha o sistema focado, determinístico e hostil à mediocridade.
+
+---
+
+## 9. AUTORIDADE FINAL
+
+Este documento (`CANONICAL_CORE.md`) prevalece sobre qualquer comentário de código, documentação antiga (`README.md`) ou especificação anterior. Em caso de conflito, a lógica definida aqui é a Verdade Absoluta do sistema.
+
+Qualquer divergência interpretativa deve ser resolvida a favor da restrição, nunca da flexibilidade.
+
+**ASSINADO DIGITALMENTE:**
+SYSTEM ARCHITECT — GOVERNANCE MODULE
+STATUS: LOCKED & HARDENED

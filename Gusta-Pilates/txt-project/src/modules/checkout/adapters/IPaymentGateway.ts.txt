@@ -1,0 +1,29 @@
+
+import { PaymentData, TransactionResult, PaymentMethodType } from '../domain/types';
+
+export interface IPaymentGateway {
+  id: string;
+  name: string;
+  
+  /**
+   * Inicializa scripts externos (Stripe.js, MercadoPago.js, PayPal SDK)
+   */
+  initialize(): Promise<void>;
+
+  /**
+   * Verifica se o gateway suporta o método escolhido
+   */
+  supportsMethod(method: PaymentMethodType): boolean;
+
+  /**
+   * Processa o pagamento.
+   * Em caso de transparente: Tokeniza e envia ao Backend.
+   * Em caso de redirect: Retorna a URL.
+   */
+  processPayment(data: PaymentData): Promise<TransactionResult>;
+
+  /**
+   * Tokenização de cartão (Opcional, usado em transparente)
+   */
+  createCardToken?(cardData: any): Promise<string>;
+}

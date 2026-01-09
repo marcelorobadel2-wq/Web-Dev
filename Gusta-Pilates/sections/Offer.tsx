@@ -1,0 +1,97 @@
+
+import React from 'react';
+import { CheckCircle2, Lock, ShieldCheck } from 'lucide-react';
+import { Button } from '../components/Button';
+import { CountDown } from '../components/CountDown';
+import { FadeIn } from '../components/FadeIn';
+
+export const Offer: React.FC = () => {
+  const stack = [
+    { name: "Protocolo Gusta Pilates Metabólico", value: "R$ 997" },
+    { name: "Bônus 1: Desafio Barriga Negativa em 21 Dias", value: "R$ 297" },
+    { name: "Bônus 2: Cardápio Anti-Inflamatório (Seca Gordura)", value: "R$ 197" },
+    { name: "Bônus 3: Kit SOS Coluna e Joelho", value: "R$ 147" },
+    { name: "Comunidade VIP de Alunas", value: "R$ 97/mês" },
+    { name: "Suporte Individualizado", value: "Inestimável" },
+  ];
+
+  const scrollToCheckout = () => {
+    document.getElementById('checkout-module')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section id="offer" className="py-24 bg-gradient-to-b from-brand-900/10 to-slate-950 relative">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          
+          <FadeIn className="bg-slate-900 border border-brand-500/30 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-brand-500/20">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-brand-600 to-brand-700 p-8 text-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+              <h2 className="text-3xl md:text-5xl font-bold text-white relative z-10">
+                Acesso Vitalício ao Protocolo
+              </h2>
+              <p className="text-brand-100 mt-2 relative z-10 font-medium">Tudo o que você precisa para emagrecer definitivamente.</p>
+            </div>
+
+            <div className="p-8 md:p-12">
+              {/* The Stack */}
+              <div className="space-y-4 mb-12">
+                {stack.map((item, i) => (
+                  <div key={i} className="flex items-center justify-between border-b border-slate-800 pb-4 last:border-0">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle2 className="w-6 h-6 text-brand-500 flex-shrink-0" />
+                      <span className="text-lg text-slate-200 font-medium">{item.name}</span>
+                    </div>
+                    <span className="text-slate-500 font-bold decoration-red-500/50 line-through text-sm md:text-base whitespace-nowrap ml-4">
+                      {item.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Price Reveal */}
+              <div className="text-center mb-10">
+                <div className="text-slate-500 text-lg mb-2">Valor Total: <span className="line-through decoration-red-500">R$ 1.997</span></div>
+                <div className="text-6xl md:text-7xl font-black text-white tracking-tight mb-2">
+                  12x R$ 49,90
+                </div>
+                <p className="text-brand-400 font-semibold">ou R$ 497 à vista com desconto</p>
+              </div>
+
+              {/* Scarcity */}
+              <div className="flex justify-center mb-8">
+                <CountDown />
+              </div>
+
+              {/* CTA */}
+              <div className="text-center space-y-4">
+                <Button fullWidth onClick={scrollToCheckout} className="text-2xl py-6 shadow-xl shadow-brand-500/20">
+                  QUERO MEU CORPO NOVO
+                </Button>
+                <div className="flex items-center justify-center gap-2 text-slate-500 text-sm">
+                  <Lock className="w-4 h-4" />
+                  <span>Pagamento 100% Seguro e Criptografado</span>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Guarantee */}
+          <FadeIn delay={0.3} className="mt-12 text-center max-w-2xl mx-auto">
+            <div className="flex justify-center mb-6">
+                <div className="relative">
+                    <div className="absolute inset-0 bg-brand-500/20 blur-xl rounded-full"></div>
+                    <ShieldCheck className="w-24 h-24 text-slate-300 opacity-80" strokeWidth={1} />
+                </div>
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4">Garantia Blindada de 30 Dias</h3>
+            <p className="text-slate-400">
+              Se em 30 dias você não notar suas roupas mais largas e o número da balança diminuir, nós devolvemos cada centavo. O risco é todo meu.
+            </p>
+          </FadeIn>
+        </div>
+      </div>
+    </section>
+  );
+};

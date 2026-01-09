@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gusta Pilates - Complete Project Recreation Guide</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #0ea5e9;
+            --code-bg: #020617;
+            --border: #334155;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1, h2, h3 {
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 40px; color: var(--accent); border-bottom: none; }
+        h2 { margin-top: 50px; font-size: 1.8rem; }
+        h3 { font-size: 1.3rem; margin-top: 30px; border-bottom: none; color: var(--accent); }
+        p, li { color: var(--text-secondary); }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: rgba(14, 165, 233, 0.1);
+            color: var(--accent);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+        pre code {
+            background-color: transparent;
+            color: #e2e8f0;
+            padding: 0;
+        }
+        .file-tree {
+            font-family: monospace;
+            line-height: 1.4;
+            color: #cbd5e1;
+        }
+        .note {
+            background-color: rgba(234, 179, 8, 0.1);
+            border-left: 4px solid #eab308;
+            padding: 15px;
+            margin: 20px 0;
+            color: #fef08a;
+        }
+        .module-box {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        th { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gusta Pilates Project Documentation</h1>
+        <p>This document serves as the canonical reference for the Gusta Pilates Landing Page and Checkout System. It contains all necessary information to recreate the software architecture, business logic, and UI exactly as designed.</p>
+
+        <!-- SECTION 1: STRUCTURE -->
+        <h2>1. Project Structure</h2>
+        <div class="module-box">
+            <pre class="file-tree">
+/
+├── .gitignore                   # Git configuration for ignored files
+├── index.html                   # HTML Entry point with Tailwind CDN config
+├── index.tsx                    # React DOM entry point
+├── metadata.json                # App metadata
+├── package.json                 # Dependencies and scripts
+├── PROJECT_SPEC.md              # High-level project specification
+├── README.md                    # Quick start guide
+├── tsconfig.json                # TypeScript compiler configuration
+├── types.ts                     # Global shared TypeScript interfaces
+├── vite.config.ts               # Vite build tool configuration
+├── components/                  # Shared UI Components
+│   ├── Button.tsx               # Reusable styled button
+│   ├── CountDown.tsx            # Scarcity timer component
+│   ├── DNAEngine.tsx            # (Deprecated/Placeholder) see DNANemesis
+│   ├── DNANemesis.tsx           # Core Prompt Engineering Logic (Governance)
+│   ├── FadeIn.tsx               # Animation Wrapper
+│   ├── Navbar.tsx               # Top Navigation Bar
+│   └── WhatsAppFab.tsx          # Floating Action Button
+├── documentation/               # Project Documentation Assets
+│   ├── CANONICAL_CORE.md        # Logic Governance for DNA Nemesis
+│   ├── CHANGELOG.md             # Version history
+│   ├── index.html               # Legacy documentation index
+│   └── original_prompt.txt      # Original instruction set
+├── sections/                    # Landing Page Sections (View Layer)
+│   ├── FAQ.tsx                  # Questions Accordion
+│   ├── Footer.tsx               # Legal links and Copyright
+│   ├── Hero.tsx                 # Above-the-fold section
+│   ├── LiveRoom.tsx             # Simulated community chat
+│   ├── Mechanism.tsx            # "How it works" explanation
+│   ├── Offer.tsx                # Pricing stack and Guarantee
+│   ├── Problem.tsx              # Pain points visualization
+│   ├── Testimonials.tsx         # 3D Carousel of success stories
+│   └── VSL.tsx                  # Video Sales Letter wrapper
+└── src/                         # Core Application Logic
+    ├── App.tsx                  # Main Layout Orchestrator
+    └── modules/                 # Domain-Driven Modules
+        └── checkout/            # Checkout System (Strategy Pattern)
+            ├── adapters/        # Payment Gateways Interfaces & Implementations
+            │   ├── IPaymentGateway.ts
+            │   ├── PayPalAdapter.ts
+            │   ├── PixAdapter.ts
+            │   └── StripeAdapter.ts
+            ├── components/      # Checkout UI Components
+            │   └── CheckoutDemo.tsx
+            ├── context/         # State Management
+            │   └── CheckoutContext.tsx
+            └── domain/          # Checkout Types
+                └── types.ts
+            </pre>
+        </div>
+
+        <!-- SECTION 2: FUNCTIONALITY -->
+        <h2>2. Component & Module Functionality</h2>
+
+        <h3>Core & Entry Points</h3>
+        <ul>
+            <li><strong>index.html:</strong> The shell of the application. It injects the `tailwind.config` via a script tag (runtime configuration), loads Google Fonts (Inter/Playfair), and handles global styles for scrollbars. It acts as the mount point for React.</li>
+            <li><strong>index.tsx:</strong> The React bootstrap file. It finds the `#root` element and renders the `App` component inside `React.StrictMode`.</li>
+            <li><strong>src/App.tsx:</strong> The main orchestrator. It composes the landing page sections (`Hero`, `VSL`, etc.) in sequential order. It wraps the application in the `CheckoutProvider` to ensure payment state is accessible globally. It also manages the global progress bar and fullscreen toggles.</li>
+        </ul>
+
+        <h3>Checkout Module (src/modules/checkout)</h3>
+        <p>This module implements a <strong>Strategy Pattern</strong> to handle multiple payment providers seamlessly.</p>
+        <div class="module-box">
+            <ul>
+                <li><strong>adapters/IPaymentGateway.ts:</strong> Defines the contract (Interface) that all payment providers must follow. Methods: `initialize`, `supportsMethod`, `processPayment`.</li>
+                <li><strong>adapters/StripeAdapter.ts:</strong> Implementation for Credit Cards. Simulates loading `Stripe.js` and tokenizing card data.</li>
+                <li><strong>adapters/PixAdapter.ts:</strong> Implementation for Brazilian Instant Payment (Pix). Generates a static/dynamic QR Code string and handles the "Pending" state.</li>
+                <li><strong>adapters/PayPalAdapter.ts:</strong> Implementation for Wallet payments. Simulates redirection to PayPal's external checkout.</li>
+                <li><strong>context/CheckoutContext.tsx:</strong> A React Context provider that holds the state of the checkout transaction (Status, Loading, Result). It is responsible for instantiating the adapters and providing the `selectGateway` and `processCheckout` functions to the UI.</li>
+                <li><strong>components/CheckoutDemo.tsx:</strong> The user interface for the checkout. It consumes the Context, renders payment method buttons, handles the "Pay" action, and displays success/error feedback or QR Codes.</li>
+            </ul>
+        </div>
+
+        <h3>UI Components (components/)</h3>
+        <ul>
+            <li><strong>DNANemesis.tsx:</strong> A sophisticated "Prompt Engineering" governance tool used to generate high-conversion copywriting text. It enforces strict logic constraints defined in `CANONICAL_CORE.md`. It features local storage persistence and history tracking.</li>
+            <li><strong>FadeIn.tsx:</strong> A wrapper component using `framer-motion`. It handles scroll-triggered animations (entry effects) for any child component passed to it.</li>
+            <li><strong>Testimonials.tsx:</strong> A complex 3D carousel component. It implements custom logic to rotate cards in a 3D space, handling zones of influence for mouse hovering and auto-rotation.</li>
+            <li><strong>LiveRoom.tsx:</strong> Simulates a live chat environment with a queue of messages appearing over time, building social proof.</li>
+        </ul>
+
+        <!-- SECTION 3: DEPENDENCIES -->
+        <h2>3. Dependencies & Configuration</h2>
+
+        <h3>package.json Dependencies</h3>
+        <table>
+            <thead><tr><th>Package</th><th>Version</th><th>Purpose</th></tr></thead>
+            <tbody>
+                <tr><td>react / react-dom</td><td>^18.3.1</td><td>Core UI Library</td></tr>
+                <tr><td>framer-motion</td><td>^11.0.0</td><td>Complex animations (scroll, layout, 3D)</td></tr>
+                <tr><td>lucide-react</td><td>^0.344.0</td><td>Iconography set</td></tr>
+                <tr><td>vite</td><td>^5.3.0</td><td>Build tool and Dev Server</td></tr>
+                <tr><td>typescript</td><td>^5.4.0</td><td>Static typing</td></tr>
+                <tr><td>tailwindcss</td><td>(CDN)</td><td>Styling (Injected via CDN in index.html for this specific template)</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Configuration Details</h3>
+        <ul>
+            <li><strong>vite.config.ts:</strong> Configured to use `@vitejs/plugin-react`. Sets up path aliases so `@/` points to the project root. Configured for a specific output directory (`dist`) and server hosting options.</li>
+            <li><strong>tsconfig.json:</strong> Set to `ESNext` module resolution to work with Vite. `strict` mode is implied or should be enabled. `jsx` is set to `react-jsx`. Paths are configured to support the `@/*` alias.</li>
+            <li><strong>Tailwind CSS:</strong> configured in <code>index.html</code> script tag. This includes the custom color palette (`brand-500`, `brand-accent`, etc.) and custom animations (`pulse-slow`).</li>
+        </ul>
+
+        <!-- SECTION 4: LOGIC -->
+        <h2>4. Business Logic</h2>
+
+        <h3>Checkout Workflow</h3>
+        <ol>
+            <li><strong>Initialization:</strong> `CheckoutProvider` initializes a list of gateways (Pix, Stripe, PayPal).</li>
+            <li><strong>Selection:</strong> When a user clicks a payment method in `CheckoutDemo`, `selectGateway(id)` is called in the Context, updating `activeGateway`.</li>
+            <li><strong>Processing:</strong> 
+                <ul>
+                    <li>The user clicks "Pay".</li>
+                    <li>`processCheckout(paymentData)` is called.</li>
+                    <li>The Context delegates execution to `activeGateway.processPayment(data)`.</li>
+                    <li>The Adapter simulates network latency and returns a `TransactionResult`.</li>
+                </ul>
+            </li>
+            <li><strong>Feedback:</strong> 
+                <li>If <strong>Pix</strong>: The Context receives a QR Code string. `CheckoutDemo` renders it.</li>
+                <li>If <strong>Stripe</strong>: Returns `APPROVED`. `CheckoutDemo` shows success.</li>
+                <li>If <strong>PayPal</strong>: Returns a `redirectUrl`. The browser redirects.</li>
+            </li>
+        </ol>
+
+        <h3>Marketing Logic</h3>
+        <ul>
+            <li><strong>Scarcity:</strong> `CountDown.tsx` is an "Evergreen" timer. It resets to 15 minutes every time the component mounts or the timer hits zero, creating persistent urgency without actually expiring.</li>
+            <li><strong>Social Proof:</strong> `LiveRoom.tsx` uses a `setInterval` to inject messages from a pre-defined queue (`INCOMING_QUEUE`) into the active message list, simulating a busy community.</li>
+            <li><strong>Conversion Funnel:</strong> The page structure follows: Hero (Attention) -> VSL (Interest) -> Problem (Agitation) -> Mechanism (Solution) -> Testimonials (Proof) -> Offer (Action).</li>
+        </ul>
+
+        <!-- SECTION 5: RUNNING -->
+        <h2>5. How to Run the Project</h2>
+
+        <div class="module-box">
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>Node.js (v18+)</li>
+                <li>npm or yarn</li>
+            </ul>
+
+            <h3>Installation</h3>
+            <pre>npm install</pre>
+
+            <h3>Running Local Server</h3>
+            <pre>npm run dev</pre>
+            <p>Access the app at <code>http://localhost:5173</code> (default Vite port).</p>
+
+            <h3>Building for Production</h3>
+            <pre>npm run build</pre>
+            <p>Generates static files in the <code>dist/</code> folder.</p>
+        </div>
+
+        <!-- SECTION 6: MAINTENANCE -->
+        <h2>6. Maintenance & Scaling Recommendations</h2>
+
+        <h3>Scalability</h3>
+        <ul>
+            <li><strong>Adding Payment Methods:</strong> To add a new gateway (e.g., Bitcoin), create a new class `CryptoAdapter` implementing `IPaymentGateway`. Instantiate it in `CheckoutContext.tsx` inside the `GATEWAYS` array. No other code changes are needed in the logic core.</li>
+            <li><strong>Copywriting Updates:</strong> Use `DNANemesis` to generate new copy, but manually update the strings in `sections/`. Do not hardcode dynamic copy generation in production for the end-user.</li>
+        </ul>
+
+        <h3>Files Requiring Frequent Updates</h3>
+        <ul>
+            <li><code>sections/Offer.tsx</code>: Update pricing, bonuses, and links here.</li>
+            <li><code>sections/FAQ.tsx</code>: Update questions based on customer support feedback.</li>
+            <li><code>modules/checkout/adapters/*</code>: Update API keys (currently hardcoded or mocked) to use `import.meta.env` variables when moving to a real backend integration.</li>
+        </ul>
+
+        <div class="note">
+            <strong>Important:</strong> The current payment adapters are <strong>MOCKS</strong>. They simulate API delays and successful responses. To go live, you must replace the mocked logic inside `processPayment` with real API calls to your backend endpoints.
+        </div>
+
+    </div>
+
+</body>
+</html>
